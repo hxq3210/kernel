@@ -1,0 +1,75 @@
+#int,hex,string,bool,tristate
+#menuconfig, config
+#if/endif
+#comment, help, ---help---, select, depends on, choice/endchoice, prompt
+#range, default
+
+comment "if you choose the menu, then you can set other config"
+
+menuconfig UPLOOKING_DRIVER
+	bool "2018,9,29 about linux kernel driver"
+	---help---
+	 you can see Documention/Kbuild/Kconfig
+
+if UPLOOKING_DRIVER
+
+config TINY4412_KEY 
+	tristate "key misc driver on tiny4412" 
+	---help---
+	 nothing
+
+config UPLOOKING_OUTPUT
+	tristate "about output info tiny4412 board" 
+	---help---
+	 output a high level to led on, or to led off
+
+config UPLOOKING_LED_NUM
+	int "to set the number of led"
+	default 2
+	range 1 4
+	---help---
+	 the total number of led is 4, you can set 1-4
+
+config UPLOOKING_DEBUG
+	string "please input a string for debug..."
+	---help---
+	 nothing
+
+config UPLOOKING_WEBCAM
+	bool "a web camral driver"
+	select UPLOOKING_USB
+	---help---
+	 nothing
+
+config UPLOOKING_USB
+	bool "usb driver"
+	---help---
+	 nothing
+
+choice 
+	prompt "choose a driver from two type for beep"
+
+config UPLOOKING_BEEP0
+	bool "beep driver 0"
+	---help---
+	 nothing
+
+config UPLOOKING_BEEP1
+	bool "beep driver 1"
+	---help---
+	 nothing
+
+endchoice
+
+config UPLOOKING_LCD
+	bool "lcd driver on tiny4412"
+	---help---
+	 nothing
+
+config UPLOOKING_VIDEO
+	bool "video device driver on tiny4412"
+	depends on UPLOOKING_LCD
+	---help---
+	 nothing
+
+endif
